@@ -41,19 +41,19 @@ This guide will instruct you through:
 <Steps>
 1. If not already logged in, run:
 
-    	```
+    	```bash
     	npx wrangler login
     	```
 
 2.  Create an R2 bucket:
 
-        ```
+        ```bash
         npx wrangler r2 bucket create r2-data-catalog-tutorial
         ```
 
 3.  Enable the catalog on your bucket:
 
-        ```
+        ```bash
         npx wrangler r2 bucket catalog enable r2-data-catalog-tutorial
         ```
 
@@ -69,10 +69,9 @@ This guide will instruct you through:
 
    <DashButton url="/?to=/:account/data-catalog/overview" />
 2. Select **Create catalog**.
-3. Enter the bucket name `r2-data-catalog-tutorial`. Since this bucket does not exist yet, the wizard will create it for you. Optionally choose a location hint.
 3. Enter the bucket name `r2-data-catalog-tutorial`. The wizard creates the bucket automatically if it does not already exist. Optionally choose a location hint.
-5. Review the configuration and select **Create catalog**.
-6. Once created, the catalog detail page displays your **Catalog URI** and **Warehouse name**. Note these values for later.
+4. Review the configuration and select **Create catalog**.
+5. Once created, the catalog detail page displays your **Catalog URI** and **Warehouse name**. Note these values for later.
 </Steps>
 </TabItem>
 </Tabs>
@@ -91,7 +90,7 @@ Iceberg clients (including [PyIceberg](https://py.iceberg.apache.org/)) must aut
 
 4. Select the **R2 Token** text to edit your API token name.
 
-5. Under **Permissions**, choose the **Admin Read & Write** permission.
+5. Under **Permissions**, choose the **Admin Read & Write** permission. This guide creates and writes to tables, so it requires read and write access. For query-only clients, you can instead use an **Admin Read only** token. For details on choosing the right permission level, refer to [Authenticate your Iceberg engine](/r2/data-catalog/manage-catalogs/#authenticate-your-iceberg-engine).
 
 6. Select **Create API Token**.
 
@@ -110,13 +109,13 @@ We will use [marimo](https://github.com/marimo-team/marimo) as a Python notebook
 <Steps>
 1. Create a directory where our notebook will be stored:
 
-    	```
+    	```bash
     	mkdir r2-data-catalog-notebook
     	```
 
 2. Change into our new directory:
 
-      ```
+      ```bash
       cd r2-data-catalog-notebook
       ```
 

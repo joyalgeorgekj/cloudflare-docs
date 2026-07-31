@@ -238,9 +238,7 @@ Bullet point rules:
 
 Always specify a language after the opening fence. Language names must be **lowercase**.
 
-Supported languages: `bash` (alias: `curl`), `c`, `css`, `dart`, `diff`, `go`, `graphql`, `hcl` (alias: `tf`), `html`, `ini`, `java`, `js` (alias: `javascript`), `json`, `jsonc`, `kotlin`, `mdx`, `php`, `powershell`, `python` (alias: `py`), `ruby` (alias: `rb`), `rust` (alias: `rs`), `sh` (alias: `shell`), `sql`, `swift`, `toml`, `ts` (alias: `typescript`), `txt` (aliases: `text`, `plaintext`), `xml`, `yaml` (alias: `yml`).
-
-Use `txt` for unsupported languages (e.g., output blocks, Apache config fragments). Do not use `output`, `env`, `csharp`, or `promql` — they fall back to `txt` with a warning.
+Always specify a language; use `txt` (aliases: `text`, `plaintext`) if no appropriate language exists.
 
 ### Terminal commands
 
@@ -316,7 +314,7 @@ All components are imported from `~/components`. Imports must appear after the f
 | `Badge`                               | Coloured status badge (`Beta`, `New`, `Deprecated`) for headings and sidebar        |
 | `LinkButton`                          | Styled link button (`variant="primary"`, `"secondary"`, `"minimal"`)                |
 | `Card` / `LinkTitleCard` / `ListCard` | Styled card containers for overview and navigation pages                            |
-| `LinkCard` / `CardGrid`               | Starlight link cards, optionally in a grid                                          |
+| `LinkCard` / `CardGrid`               | Nimbus link cards, optionally in a grid                                          |
 | `DashButton`                          | Button linking to a validated dashboard deeplink                                    |
 | `GitHubCode`                          | Fetch and display a file from a Cloudflare GitHub repo (use full commit hash)       |
 | `DirectoryListing`                    | Auto-generated child page listing for nav/overview pages                            |

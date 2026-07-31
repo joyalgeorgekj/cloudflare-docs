@@ -335,7 +335,7 @@
 				{
 					"label": "curl",
 					"language": "bash",
-					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/responses \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"openai/gpt-5.4-pro\",\n  \"input\": [\n    {\n      \"content\": \"I need help planning a road trip from San Francisco to Los Angeles.\",\n      \"role\": \"user\"\n    },\n    {\n      \"content\": \"I'd be happy to help! The drive is about 380 miles and takes roughly 5-6 hours. Would you like suggestions for scenic routes or interesting stops along the way?\",\n      \"role\": \"assistant\"\n    },\n    {\n      \"content\": \"Yes, name three good stops in one short sentence each.\",\n      \"role\": \"user\"\n    }\n  ],\n  \"max_output_tokens\": 16000\n}'"
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/responses \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"openai/gpt-5.4-pro\",\n  \"input\": [\n    {\n      \"content\": \"I need help planning a road trip from San Francisco to Los Angeles.\",\n      \"role\": \"user\"\n    },\n    {\n      \"content\": \"I'\\''d be happy to help! The drive is about 380 miles and takes roughly 5-6 hours. Would you like suggestions for scenic routes or interesting stops along the way?\",\n      \"role\": \"assistant\"\n    },\n    {\n      \"content\": \"Yes, name three good stops in one short sentence each.\",\n      \"role\": \"user\"\n    }\n  ],\n  \"max_output_tokens\": 16000\n}'"
 				}
 			]
 		},
@@ -553,7 +553,7 @@
 	"default_example": null,
 	"code_snippets": [],
 	"supports_async": false,
-	"zdr": false,
+	"zdr": true,
 	"zdr_comment": null,
 	"external_info": "https://openai.com/",
 	"terms": "https://openai.com/policies/",
@@ -562,11 +562,15 @@
 		"API": "Responses",
 		"Architecture": "Transformer"
 	},
+	"request_formats": [
+		"responses"
+	],
+	"banner": null,
 	"created_at": "2026-05-22 17:53:36",
 	"schema": {
 		"input": {
 			"$schema": "https://json-schema.org/draft/2020-12/schema",
-			"additionalProperties": false,
+			"type": "object",
 			"properties": {
 				"input": {
 					"anyOf": [
@@ -574,99 +578,99 @@
 							"type": "string"
 						},
 						{
-							"items": {},
-							"type": "array"
+							"type": "array",
+							"items": {}
 						}
 					]
 				},
 				"instructions": {
 					"type": "string"
 				},
+				"temperature": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 2
+				},
 				"max_output_tokens": {
-					"exclusiveMinimum": 0,
-					"type": "number"
+					"type": "number",
+					"exclusiveMinimum": 0
+				},
+				"top_p": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 1
+				},
+				"stream": {
+					"type": "boolean"
+				},
+				"tools": {
+					"type": "array",
+					"items": {}
+				},
+				"tool_choice": {},
+				"text": {
+					"type": "object",
+					"properties": {
+						"format": {}
+					},
+					"additionalProperties": {}
 				},
 				"reasoning": {
-					"additionalProperties": {},
+					"type": "object",
 					"properties": {
 						"effort": {
+							"type": "string",
 							"enum": [
 								"none",
 								"low",
 								"medium",
 								"high"
-							],
-							"type": "string"
+							]
 						}
 					},
-					"type": "object"
-				},
-				"stream": {
-					"type": "boolean"
-				},
-				"temperature": {
-					"maximum": 2,
-					"minimum": 0,
-					"type": "number"
-				},
-				"text": {
-					"additionalProperties": {},
-					"properties": {
-						"format": {}
-					},
-					"type": "object"
-				},
-				"tool_choice": {},
-				"tools": {
-					"items": {},
-					"type": "array"
-				},
-				"top_p": {
-					"maximum": 1,
-					"minimum": 0,
-					"type": "number"
+					"additionalProperties": {}
 				}
 			},
 			"required": [
 				"input"
 			],
-			"type": "object"
+			"additionalProperties": {}
 		},
 		"output": {
 			"$schema": "https://json-schema.org/draft/2020-12/schema",
-			"additionalProperties": {},
+			"type": "object",
 			"properties": {
-				"created_at": {
-					"type": "number"
-				},
 				"id": {
 					"type": "string"
+				},
+				"object": {
+					"type": "string",
+					"const": "response"
+				},
+				"created_at": {
+					"type": "number"
 				},
 				"model": {
 					"type": "string"
 				},
-				"object": {
-					"const": "response",
-					"type": "string"
-				},
 				"output": {
-					"items": {},
-					"type": "array"
+					"type": "array",
+					"items": {}
 				},
 				"output_text": {
 					"type": "string"
 				},
 				"status": {
+					"type": "string",
 					"enum": [
 						"in_progress",
 						"completed",
 						"failed",
 						"incomplete"
-					],
-					"type": "string"
+					]
 				},
 				"usage": {
-					"additionalProperties": {},
+					"type": "object",
 					"properties": {
 						"input_tokens": {
 							"type": "number"
@@ -683,7 +687,7 @@
 						"output_tokens",
 						"total_tokens"
 					],
-					"type": "object"
+					"additionalProperties": {}
 				}
 			},
 			"required": [
@@ -693,7 +697,7 @@
 				"model",
 				"output"
 			],
-			"type": "object"
+			"additionalProperties": {}
 		}
 	}
 }
